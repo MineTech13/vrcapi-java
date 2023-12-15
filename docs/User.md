@@ -12,6 +12,7 @@
 |**bioLinks** | **List&lt;String&gt;** |  |  |
 |**currentAvatarImageUrl** | **String** | When profilePicOverride is not empty, use it instead. |  |
 |**currentAvatarThumbnailImageUrl** | **String** | When profilePicOverride is not empty, use it instead. |  |
+|**currentAvatarTags** | **List&lt;String&gt;** | &lt;- Always empty. |  [optional] |
 |**dateJoined** | **LocalDate** |  |  |
 |**developerType** | **DeveloperType** |  |  |
 |**displayName** | **String** | A users visual display name. This is what shows up in-game, and can different from their &#x60;username&#x60;. Changing display name is restricted to a cooldown period. |  |
