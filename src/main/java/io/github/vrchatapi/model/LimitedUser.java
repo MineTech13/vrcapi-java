@@ -70,6 +70,10 @@ public class LimitedUser {
   @SerializedName(SERIALIZED_NAME_CURRENT_AVATAR_THUMBNAIL_IMAGE_URL)
   private String currentAvatarThumbnailImageUrl;
 
+  public static final String SERIALIZED_NAME_CURRENT_AVATAR_TAGS = "currentAvatarTags";
+  @SerializedName(SERIALIZED_NAME_CURRENT_AVATAR_TAGS)
+  private List<String> currentAvatarTags = null;
+
   public static final String SERIALIZED_NAME_DEVELOPER_TYPE = "developerType";
   @SerializedName(SERIALIZED_NAME_DEVELOPER_TYPE)
   private DeveloperType developerType = DeveloperType.NONE;
@@ -125,6 +129,10 @@ public class LimitedUser {
   public static final String SERIALIZED_NAME_FRIEND_KEY = "friendKey";
   @SerializedName(SERIALIZED_NAME_FRIEND_KEY)
   private String friendKey;
+
+  public static final String SERIALIZED_NAME_LAST_LOGIN = "last_login";
+  @SerializedName(SERIALIZED_NAME_LAST_LOGIN)
+  private String lastLogin;
 
   public LimitedUser() {
   }
@@ -226,6 +234,37 @@ public class LimitedUser {
 
   public void setCurrentAvatarThumbnailImageUrl(String currentAvatarThumbnailImageUrl) {
     this.currentAvatarThumbnailImageUrl = currentAvatarThumbnailImageUrl;
+  }
+
+
+  public LimitedUser currentAvatarTags(List<String> currentAvatarTags) {
+    
+    this.currentAvatarTags = currentAvatarTags;
+    return this;
+  }
+
+  public LimitedUser addCurrentAvatarTagsItem(String currentAvatarTagsItem) {
+    if (this.currentAvatarTags == null) {
+      this.currentAvatarTags = new ArrayList<>();
+    }
+    this.currentAvatarTags.add(currentAvatarTagsItem);
+    return this;
+  }
+
+   /**
+   * &lt;- Always empty.
+   * @return currentAvatarTags
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "<- Always empty.")
+
+  public List<String> getCurrentAvatarTags() {
+    return currentAvatarTags;
+  }
+
+
+  public void setCurrentAvatarTags(List<String> currentAvatarTags) {
+    this.currentAvatarTags = currentAvatarTags;
   }
 
 
@@ -558,6 +597,29 @@ public class LimitedUser {
   }
 
 
+  public LimitedUser lastLogin(String lastLogin) {
+    
+    this.lastLogin = lastLogin;
+    return this;
+  }
+
+   /**
+   * Get lastLogin
+   * @return lastLogin
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getLastLogin() {
+    return lastLogin;
+  }
+
+
+  public void setLastLogin(String lastLogin) {
+    this.lastLogin = lastLogin;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -572,6 +634,7 @@ public class LimitedUser {
         Objects.equals(this.bioLinks, limitedUser.bioLinks) &&
         Objects.equals(this.currentAvatarImageUrl, limitedUser.currentAvatarImageUrl) &&
         Objects.equals(this.currentAvatarThumbnailImageUrl, limitedUser.currentAvatarThumbnailImageUrl) &&
+        Objects.equals(this.currentAvatarTags, limitedUser.currentAvatarTags) &&
         Objects.equals(this.developerType, limitedUser.developerType) &&
         Objects.equals(this.displayName, limitedUser.displayName) &&
         Objects.equals(this.fallbackAvatar, limitedUser.fallbackAvatar) &&
@@ -585,12 +648,13 @@ public class LimitedUser {
         Objects.equals(this.userIcon, limitedUser.userIcon) &&
         Objects.equals(this.username, limitedUser.username) &&
         Objects.equals(this.location, limitedUser.location) &&
-        Objects.equals(this.friendKey, limitedUser.friendKey);
+        Objects.equals(this.friendKey, limitedUser.friendKey) &&
+        Objects.equals(this.lastLogin, limitedUser.lastLogin);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bio, bioLinks, currentAvatarImageUrl, currentAvatarThumbnailImageUrl, developerType, displayName, fallbackAvatar, id, isFriend, lastPlatform, profilePicOverride, status, statusDescription, tags, userIcon, username, location, friendKey);
+    return Objects.hash(bio, bioLinks, currentAvatarImageUrl, currentAvatarThumbnailImageUrl, currentAvatarTags, developerType, displayName, fallbackAvatar, id, isFriend, lastPlatform, profilePicOverride, status, statusDescription, tags, userIcon, username, location, friendKey, lastLogin);
   }
 
   @Override
@@ -601,6 +665,7 @@ public class LimitedUser {
     sb.append("    bioLinks: ").append(toIndentedString(bioLinks)).append("\n");
     sb.append("    currentAvatarImageUrl: ").append(toIndentedString(currentAvatarImageUrl)).append("\n");
     sb.append("    currentAvatarThumbnailImageUrl: ").append(toIndentedString(currentAvatarThumbnailImageUrl)).append("\n");
+    sb.append("    currentAvatarTags: ").append(toIndentedString(currentAvatarTags)).append("\n");
     sb.append("    developerType: ").append(toIndentedString(developerType)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    fallbackAvatar: ").append(toIndentedString(fallbackAvatar)).append("\n");
@@ -615,6 +680,7 @@ public class LimitedUser {
     sb.append("    username: ").append(toIndentedString(username)).append("\n");
     sb.append("    location: ").append(toIndentedString(location)).append("\n");
     sb.append("    friendKey: ").append(toIndentedString(friendKey)).append("\n");
+    sb.append("    lastLogin: ").append(toIndentedString(lastLogin)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -641,6 +707,7 @@ public class LimitedUser {
     openapiFields.add("bioLinks");
     openapiFields.add("currentAvatarImageUrl");
     openapiFields.add("currentAvatarThumbnailImageUrl");
+    openapiFields.add("currentAvatarTags");
     openapiFields.add("developerType");
     openapiFields.add("displayName");
     openapiFields.add("fallbackAvatar");
@@ -655,6 +722,7 @@ public class LimitedUser {
     openapiFields.add("username");
     openapiFields.add("location");
     openapiFields.add("friendKey");
+    openapiFields.add("last_login");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -712,6 +780,10 @@ public class LimitedUser {
       if (!jsonObj.get("currentAvatarThumbnailImageUrl").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `currentAvatarThumbnailImageUrl` to be a primitive type in the JSON string but got `%s`", jsonObj.get("currentAvatarThumbnailImageUrl").toString()));
       }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("currentAvatarTags") != null && !jsonObj.get("currentAvatarTags").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `currentAvatarTags` to be an array in the JSON string but got `%s`", jsonObj.get("currentAvatarTags").toString()));
+      }
       if (!jsonObj.get("displayName").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `displayName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("displayName").toString()));
       }
@@ -747,6 +819,9 @@ public class LimitedUser {
       }
       if ((jsonObj.get("friendKey") != null && !jsonObj.get("friendKey").isJsonNull()) && !jsonObj.get("friendKey").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `friendKey` to be a primitive type in the JSON string but got `%s`", jsonObj.get("friendKey").toString()));
+      }
+      if ((jsonObj.get("last_login") != null && !jsonObj.get("last_login").isJsonNull()) && !jsonObj.get("last_login").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `last_login` to be a primitive type in the JSON string but got `%s`", jsonObj.get("last_login").toString()));
       }
   }
 

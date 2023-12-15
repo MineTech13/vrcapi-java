@@ -12,6 +12,7 @@
 |**bioLinks** | **List&lt;String&gt;** | &lt;- Always empty. |  [optional] |
 |**currentAvatarImageUrl** | **String** | When profilePicOverride is not empty, use it instead. |  |
 |**currentAvatarThumbnailImageUrl** | **String** | When profilePicOverride is not empty, use it instead. |  |
+|**currentAvatarTags** | **List&lt;String&gt;** | &lt;- Always empty. |  [optional] |
 |**developerType** | **DeveloperType** |  |  |
 |**displayName** | **String** |  |  |
 |**fallbackAvatar** | **String** |  |  [optional] |
@@ -26,6 +27,7 @@
 |**username** | **String** | -| **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429). |  [optional] |
 |**location** | **String** |  |  [optional] |
 |**friendKey** | **String** |  |  [optional] |
+|**lastLogin** | **String** |  |  [optional] |
 
 
 
