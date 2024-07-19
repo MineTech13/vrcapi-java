@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**action** | **String** |  |  [optional] |
+|**action** | **GroupJoinRequestAction** |  |  |
+|**block** | **Boolean** | Whether to block the user from requesting again |  [optional] |
 
 
 

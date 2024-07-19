@@ -1,11 +1,12 @@
 # GroupsApi
 
-All URIs are relative to *https://api.vrchat.cloud/api/1*
+All URIs are relative to *https://vrchat.com/api/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**addGroupGalleryImage**](GroupsApi.md#addGroupGalleryImage) | **POST** /groups/{groupId}/galleries/{groupGalleryId}/images | Add Group Gallery Image |
 | [**addGroupMemberRole**](GroupsApi.md#addGroupMemberRole) | **PUT** /groups/{groupId}/members/{userId}/roles/{groupRoleId} | Add Role to GroupMember |
+| [**addGroupPost**](GroupsApi.md#addGroupPost) | **POST** /groups/{groupId}/posts | Create a post in a Group |
 | [**banGroupMember**](GroupsApi.md#banGroupMember) | **POST** /groups/{groupId}/bans | Ban Group Member |
 | [**cancelGroupRequest**](GroupsApi.md#cancelGroupRequest) | **DELETE** /groups/{groupId}/requests | Cancel Group Join Request |
 | [**createGroup**](GroupsApi.md#createGroup) | **POST** /groups | Create Group |
@@ -18,16 +19,19 @@ All URIs are relative to *https://api.vrchat.cloud/api/1*
 | [**deleteGroupGallery**](GroupsApi.md#deleteGroupGallery) | **DELETE** /groups/{groupId}/galleries/{groupGalleryId} | Delete Group Gallery |
 | [**deleteGroupGalleryImage**](GroupsApi.md#deleteGroupGalleryImage) | **DELETE** /groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId} | Delete Group Gallery Image |
 | [**deleteGroupInvite**](GroupsApi.md#deleteGroupInvite) | **DELETE** /groups/{groupId}/invites/{userId} | Delete User Invite |
+| [**deleteGroupPost**](GroupsApi.md#deleteGroupPost) | **DELETE** /groups/{groupId}/posts/{notificationId} | Delete a Group post |
 | [**deleteGroupRole**](GroupsApi.md#deleteGroupRole) | **DELETE** /groups/{groupId}/roles/{groupRoleId} | Delete Group Role |
 | [**getGroup**](GroupsApi.md#getGroup) | **GET** /groups/{groupId} | Get Group by ID |
 | [**getGroupAnnouncements**](GroupsApi.md#getGroupAnnouncements) | **GET** /groups/{groupId}/announcement | Get Group Announcement |
 | [**getGroupAuditLogs**](GroupsApi.md#getGroupAuditLogs) | **GET** /groups/{groupId}/auditLogs | Get Group Audit Logs |
 | [**getGroupBans**](GroupsApi.md#getGroupBans) | **GET** /groups/{groupId}/bans | Get Group Bans |
 | [**getGroupGalleryImages**](GroupsApi.md#getGroupGalleryImages) | **GET** /groups/{groupId}/galleries/{groupGalleryId} | Get Group Gallery Images |
+| [**getGroupInstances**](GroupsApi.md#getGroupInstances) | **GET** /groups/{groupId}/instances | Get Group Instances |
 | [**getGroupInvites**](GroupsApi.md#getGroupInvites) | **GET** /groups/{groupId}/invites | Get Group Invites Sent |
 | [**getGroupMember**](GroupsApi.md#getGroupMember) | **GET** /groups/{groupId}/members/{userId} | Get Group Member |
 | [**getGroupMembers**](GroupsApi.md#getGroupMembers) | **GET** /groups/{groupId}/members | List Group Members |
 | [**getGroupPermissions**](GroupsApi.md#getGroupPermissions) | **GET** /groups/{groupId}/permissions | List Group Permissions |
+| [**getGroupPost**](GroupsApi.md#getGroupPost) | **GET** /groups/{groupId}/posts | Get posts from a Group |
 | [**getGroupRequests**](GroupsApi.md#getGroupRequests) | **GET** /groups/{groupId}/requests | Get Group Join Requests |
 | [**getGroupRoles**](GroupsApi.md#getGroupRoles) | **GET** /groups/{groupId}/roles | Get Group Roles |
 | [**joinGroup**](GroupsApi.md#joinGroup) | **POST** /groups/{groupId}/join | Join Group |
@@ -40,6 +44,7 @@ All URIs are relative to *https://api.vrchat.cloud/api/1*
 | [**updateGroup**](GroupsApi.md#updateGroup) | **PUT** /groups/{groupId} | Update Group |
 | [**updateGroupGallery**](GroupsApi.md#updateGroupGallery) | **PUT** /groups/{groupId}/galleries/{groupGalleryId} | Update Group Gallery |
 | [**updateGroupMember**](GroupsApi.md#updateGroupMember) | **PUT** /groups/{groupId}/members/{userId} | Update Group Member |
+| [**updateGroupPost**](GroupsApi.md#updateGroupPost) | **PUT** /groups/{groupId}/posts/{notificationId} | Edits a Group post |
 | [**updateGroupRole**](GroupsApi.md#updateGroupRole) | **PUT** /groups/{groupId}/roles/{groupRoleId} | Update Group Role |
 
 
@@ -64,7 +69,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -96,7 +101,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | **String**| Must be a valid group ID. | |
 | **groupGalleryId** | **String**| Must be a valid group gallery ID. | |
-| **addGroupGalleryImageRequest** | [**AddGroupGalleryImageRequest**](AddGroupGalleryImageRequest.md)|  | [optional] |
+| **addGroupGalleryImageRequest** | [**AddGroupGalleryImageRequest**](AddGroupGalleryImageRequest.md)|  | |
 
 ### Return type
 
@@ -139,7 +144,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -193,6 +198,78 @@ public class Example {
 | **401** | Error response due to missing auth cookie. |  -  |
 | **404** | Error response when trying to perform operations on a non-existing group. |  -  |
 
+<a name="addGroupPost"></a>
+# **addGroupPost**
+> GroupPost addGroupPost(groupId, createGroupPostRequest)
+
+Create a post in a Group
+
+Create a post in a Group.
+
+### Example
+```java
+// Import classes:
+import io.github.vrchatapi.ApiClient;
+import io.github.vrchatapi.ApiException;
+import io.github.vrchatapi.Configuration;
+import io.github.vrchatapi.auth.*;
+import io.github.vrchatapi.models.*;
+import io.github.vrchatapi.api.GroupsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://vrchat.com/api/1");
+    
+    // Configure API key authorization: authCookie
+    ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
+    authCookie.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //authCookie.setApiKeyPrefix("Token");
+
+    GroupsApi apiInstance = new GroupsApi(defaultClient);
+    String groupId = "grp_00000000-0000-0000-0000-000000000000"; // String | Must be a valid group ID.
+    CreateGroupPostRequest createGroupPostRequest = new CreateGroupPostRequest(); // CreateGroupPostRequest | 
+    try {
+      GroupPost result = apiInstance.addGroupPost(groupId, createGroupPostRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupsApi#addGroupPost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | **String**| Must be a valid group ID. | |
+| **createGroupPostRequest** | [**CreateGroupPostRequest**](CreateGroupPostRequest.md)|  | |
+
+### Return type
+
+[**GroupPost**](GroupPost.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Returns a GroupPost object. |  -  |
+| **401** | Error response due to missing auth cookie. |  -  |
+
 <a name="banGroupMember"></a>
 # **banGroupMember**
 > GroupMember banGroupMember(groupId, banGroupMemberRequest)
@@ -214,7 +291,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -244,7 +321,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | **String**| Must be a valid group ID. | |
-| **banGroupMemberRequest** | [**BanGroupMemberRequest**](BanGroupMemberRequest.md)|  | [optional] |
+| **banGroupMemberRequest** | [**BanGroupMemberRequest**](BanGroupMemberRequest.md)|  | |
 
 ### Return type
 
@@ -263,6 +340,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Returns a list of GroupMember objects. |  -  |
+| **400** | Bad request error response when banning a user |  -  |
 | **401** | Error response due to missing auth cookie. |  -  |
 | **404** | Error response when trying to perform operations on a non-existing group. |  -  |
 
@@ -287,7 +365,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -358,7 +436,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -386,7 +464,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **createGroupRequest** | [**CreateGroupRequest**](CreateGroupRequest.md)|  | [optional] |
+| **createGroupRequest** | [**CreateGroupRequest**](CreateGroupRequest.md)|  | |
 
 ### Return type
 
@@ -428,7 +506,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -458,7 +536,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | **String**| Must be a valid group ID. | |
-| **createGroupAnnouncementRequest** | [**CreateGroupAnnouncementRequest**](CreateGroupAnnouncementRequest.md)|  | [optional] |
+| **createGroupAnnouncementRequest** | [**CreateGroupAnnouncementRequest**](CreateGroupAnnouncementRequest.md)|  | |
 
 ### Return type
 
@@ -501,7 +579,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -531,7 +609,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | **String**| Must be a valid group ID. | |
-| **createGroupGalleryRequest** | [**CreateGroupGalleryRequest**](CreateGroupGalleryRequest.md)|  | [optional] |
+| **createGroupGalleryRequest** | [**CreateGroupGalleryRequest**](CreateGroupGalleryRequest.md)|  | |
 
 ### Return type
 
@@ -574,7 +652,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -603,7 +681,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | **String**| Must be a valid group ID. | |
-| **createGroupInviteRequest** | [**CreateGroupInviteRequest**](CreateGroupInviteRequest.md)|  | [optional] |
+| **createGroupInviteRequest** | [**CreateGroupInviteRequest**](CreateGroupInviteRequest.md)|  | |
 
 ### Return type
 
@@ -622,8 +700,9 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **400** | User &lt;displayName&gt; is already invited |  -  |
+| **400** | Bad request error response when creating a group invite. |  -  |
 | **401** | Error response due to missing auth cookie. |  -  |
+| **403** | Forbidden error response when creating a group invite. |  -  |
 | **404** | Error response when trying to perform operations on a non-existing group. |  -  |
 
 <a name="createGroupRole"></a>
@@ -647,7 +726,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -677,7 +756,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | **String**| Must be a valid group ID. | |
-| **createGroupRoleRequest** | [**CreateGroupRoleRequest**](CreateGroupRoleRequest.md)|  | [optional] |
+| **createGroupRoleRequest** | [**CreateGroupRoleRequest**](CreateGroupRoleRequest.md)|  | |
 
 ### Return type
 
@@ -720,7 +799,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -791,7 +870,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -862,7 +941,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -935,7 +1014,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1011,7 +1090,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1059,7 +1138,81 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
+| **400** | Bad request error response when deleting a group invite |  -  |
 | **401** | Error response due to missing auth cookie. |  -  |
+
+<a name="deleteGroupPost"></a>
+# **deleteGroupPost**
+> Success deleteGroupPost(groupId, notificationId)
+
+Delete a Group post
+
+Delete a Group post
+
+### Example
+```java
+// Import classes:
+import io.github.vrchatapi.ApiClient;
+import io.github.vrchatapi.ApiException;
+import io.github.vrchatapi.Configuration;
+import io.github.vrchatapi.auth.*;
+import io.github.vrchatapi.models.*;
+import io.github.vrchatapi.api.GroupsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://vrchat.com/api/1");
+    
+    // Configure API key authorization: authCookie
+    ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
+    authCookie.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //authCookie.setApiKeyPrefix("Token");
+
+    GroupsApi apiInstance = new GroupsApi(defaultClient);
+    String groupId = "grp_00000000-0000-0000-0000-000000000000"; // String | Must be a valid group ID.
+    String notificationId = "notificationId_example"; // String | Must be a valid notification ID.
+    try {
+      Success result = apiInstance.deleteGroupPost(groupId, notificationId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupsApi#deleteGroupPost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | **String**| Must be a valid group ID. | |
+| **notificationId** | **String**| Must be a valid notification ID. | |
+
+### Return type
+
+[**Success**](Success.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Response after deleting a group post. |  -  |
+| **401** | Error response due to missing auth cookie. |  -  |
+| **404** | Response after deleting a group post. |  -  |
 
 <a name="deleteGroupRole"></a>
 # **deleteGroupRole**
@@ -1082,7 +1235,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1155,7 +1308,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1228,7 +1381,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1299,7 +1452,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1378,7 +1531,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1453,7 +1606,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1511,9 +1664,80 @@ public class Example {
 | **401** | Error response due to missing auth cookie. |  -  |
 | **404** | Error response when trying to perform operations on a non-existing group. |  -  |
 
+<a name="getGroupInstances"></a>
+# **getGroupInstances**
+> List&lt;GroupInstance&gt; getGroupInstances(groupId)
+
+Get Group Instances
+
+Returns a list of group instances
+
+### Example
+```java
+// Import classes:
+import io.github.vrchatapi.ApiClient;
+import io.github.vrchatapi.ApiException;
+import io.github.vrchatapi.Configuration;
+import io.github.vrchatapi.auth.*;
+import io.github.vrchatapi.models.*;
+import io.github.vrchatapi.api.GroupsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://vrchat.com/api/1");
+    
+    // Configure API key authorization: authCookie
+    ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
+    authCookie.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //authCookie.setApiKeyPrefix("Token");
+
+    GroupsApi apiInstance = new GroupsApi(defaultClient);
+    String groupId = "grp_00000000-0000-0000-0000-000000000000"; // String | Must be a valid group ID.
+    try {
+      List<GroupInstance> result = apiInstance.getGroupInstances(groupId);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupsApi#getGroupInstances");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | **String**| Must be a valid group ID. | |
+
+### Return type
+
+[**List&lt;GroupInstance&gt;**](GroupInstance.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Returns a list of GroupInstance objects. |  -  |
+| **401** | Error response due to missing auth cookie. |  -  |
+| **404** | Error response when trying to perform operations on a non-existing group. |  -  |
+
 <a name="getGroupInvites"></a>
 # **getGroupInvites**
-> List&lt;GroupMember&gt; getGroupInvites(groupId)
+> List&lt;GroupMember&gt; getGroupInvites(groupId, n, offset)
 
 Get Group Invites Sent
 
@@ -1532,7 +1756,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1542,8 +1766,10 @@ public class Example {
 
     GroupsApi apiInstance = new GroupsApi(defaultClient);
     String groupId = "grp_00000000-0000-0000-0000-000000000000"; // String | Must be a valid group ID.
+    Integer n = 60; // Integer | The number of objects to return.
+    Integer offset = 56; // Integer | A zero-based offset from the default object sorting from where search results start.
     try {
-      List<GroupMember> result = apiInstance.getGroupInvites(groupId);
+      List<GroupMember> result = apiInstance.getGroupInvites(groupId, n, offset);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling GroupsApi#getGroupInvites");
@@ -1561,6 +1787,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | **String**| Must be a valid group ID. | |
+| **n** | **Integer**| The number of objects to return. | [optional] [default to 60] |
+| **offset** | **Integer**| A zero-based offset from the default object sorting from where search results start. | [optional] |
 
 ### Return type
 
@@ -1604,7 +1832,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1677,7 +1905,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1755,7 +1983,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1806,9 +2034,85 @@ public class Example {
 | **401** | Error response due to missing auth cookie. |  -  |
 | **404** | Error response when trying to perform operations on a non-existing group. |  -  |
 
+<a name="getGroupPost"></a>
+# **getGroupPost**
+> GroupPost getGroupPost(groupId, n, offset, publicOnly)
+
+Get posts from a Group
+
+Get posts from a Group
+
+### Example
+```java
+// Import classes:
+import io.github.vrchatapi.ApiClient;
+import io.github.vrchatapi.ApiException;
+import io.github.vrchatapi.Configuration;
+import io.github.vrchatapi.auth.*;
+import io.github.vrchatapi.models.*;
+import io.github.vrchatapi.api.GroupsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://vrchat.com/api/1");
+    
+    // Configure API key authorization: authCookie
+    ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
+    authCookie.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //authCookie.setApiKeyPrefix("Token");
+
+    GroupsApi apiInstance = new GroupsApi(defaultClient);
+    String groupId = "grp_00000000-0000-0000-0000-000000000000"; // String | Must be a valid group ID.
+    Integer n = 60; // Integer | The number of objects to return.
+    Integer offset = 56; // Integer | A zero-based offset from the default object sorting from where search results start.
+    Boolean publicOnly = true; // Boolean | See public posts only.
+    try {
+      GroupPost result = apiInstance.getGroupPost(groupId, n, offset, publicOnly);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupsApi#getGroupPost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | **String**| Must be a valid group ID. | |
+| **n** | **Integer**| The number of objects to return. | [optional] [default to 60] |
+| **offset** | **Integer**| A zero-based offset from the default object sorting from where search results start. | [optional] |
+| **publicOnly** | **Boolean**| See public posts only. | [optional] |
+
+### Return type
+
+[**GroupPost**](GroupPost.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Returns a GroupPost object. |  -  |
+| **401** | Error response due to missing auth cookie. |  -  |
+
 <a name="getGroupRequests"></a>
 # **getGroupRequests**
-> List&lt;GroupMember&gt; getGroupRequests(groupId)
+> List&lt;GroupMember&gt; getGroupRequests(groupId, n, offset, blocked)
 
 Get Group Join Requests
 
@@ -1827,7 +2131,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1837,8 +2141,11 @@ public class Example {
 
     GroupsApi apiInstance = new GroupsApi(defaultClient);
     String groupId = "grp_00000000-0000-0000-0000-000000000000"; // String | Must be a valid group ID.
+    Integer n = 60; // Integer | The number of objects to return.
+    Integer offset = 56; // Integer | A zero-based offset from the default object sorting from where search results start.
+    Boolean blocked = true; // Boolean | See blocked join requests
     try {
-      List<GroupMember> result = apiInstance.getGroupRequests(groupId);
+      List<GroupMember> result = apiInstance.getGroupRequests(groupId, n, offset, blocked);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling GroupsApi#getGroupRequests");
@@ -1856,6 +2163,9 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | **String**| Must be a valid group ID. | |
+| **n** | **Integer**| The number of objects to return. | [optional] [default to 60] |
+| **offset** | **Integer**| A zero-based offset from the default object sorting from where search results start. | [optional] |
+| **blocked** | **Boolean**| See blocked join requests | [optional] |
 
 ### Return type
 
@@ -1874,6 +2184,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Returns a list of GroupMember objects. |  -  |
+| **400** | Bad request error response when responding to a group join request |  -  |
 | **403** | Error response when trying to perform operations on a group you are not member of. |  -  |
 | **404** | Error response when trying to perform operations on a non-existing group. |  -  |
 
@@ -1898,7 +2209,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -1969,7 +2280,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -2041,7 +2352,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -2114,7 +2425,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -2184,7 +2495,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -2259,7 +2570,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -2290,7 +2601,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | **String**| Must be a valid group ID. | |
 | **userId** | **String**| Must be a valid user ID. | |
-| **respondGroupJoinRequest** | [**RespondGroupJoinRequest**](RespondGroupJoinRequest.md)|  | [optional] |
+| **respondGroupJoinRequest** | [**RespondGroupJoinRequest**](RespondGroupJoinRequest.md)|  | |
 
 ### Return type
 
@@ -2332,7 +2643,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
 
     GroupsApi apiInstance = new GroupsApi(defaultClient);
     String query = "query_example"; // String | Query to search for, can be either Group Name or Group shortCode
@@ -2400,7 +2711,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -2473,7 +2784,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -2546,7 +2857,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -2621,7 +2932,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
@@ -2675,6 +2986,81 @@ public class Example {
 | **401** | Error response due to missing auth cookie. |  -  |
 | **404** | Error response when trying to perform operations on a non-existing group. |  -  |
 
+<a name="updateGroupPost"></a>
+# **updateGroupPost**
+> GroupPost updateGroupPost(groupId, notificationId, createGroupPostRequest)
+
+Edits a Group post
+
+Edits a Group post
+
+### Example
+```java
+// Import classes:
+import io.github.vrchatapi.ApiClient;
+import io.github.vrchatapi.ApiException;
+import io.github.vrchatapi.Configuration;
+import io.github.vrchatapi.auth.*;
+import io.github.vrchatapi.models.*;
+import io.github.vrchatapi.api.GroupsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://vrchat.com/api/1");
+    
+    // Configure API key authorization: authCookie
+    ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
+    authCookie.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //authCookie.setApiKeyPrefix("Token");
+
+    GroupsApi apiInstance = new GroupsApi(defaultClient);
+    String groupId = "grp_00000000-0000-0000-0000-000000000000"; // String | Must be a valid group ID.
+    String notificationId = "notificationId_example"; // String | Must be a valid notification ID.
+    CreateGroupPostRequest createGroupPostRequest = new CreateGroupPostRequest(); // CreateGroupPostRequest | 
+    try {
+      GroupPost result = apiInstance.updateGroupPost(groupId, notificationId, createGroupPostRequest);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling GroupsApi#updateGroupPost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **groupId** | **String**| Must be a valid group ID. | |
+| **notificationId** | **String**| Must be a valid notification ID. | |
+| **createGroupPostRequest** | [**CreateGroupPostRequest**](CreateGroupPostRequest.md)|  | |
+
+### Return type
+
+[**GroupPost**](GroupPost.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Returns a GroupPost object. |  -  |
+| **401** | Error response due to missing auth cookie. |  -  |
+| **404** | Response after deleting a group post. |  -  |
+
 <a name="updateGroupRole"></a>
 # **updateGroupRole**
 > List&lt;GroupRole&gt; updateGroupRole(groupId, groupRoleId, updateGroupRoleRequest)
@@ -2696,7 +3082,7 @@ import io.github.vrchatapi.api.GroupsApi;
 public class Example {
   public static void main(String[] args) {
     ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://api.vrchat.cloud/api/1");
+    defaultClient.setBasePath("https://vrchat.com/api/1");
     
     // Configure API key authorization: authCookie
     ApiKeyAuth authCookie = (ApiKeyAuth) defaultClient.getAuthentication("authCookie");
