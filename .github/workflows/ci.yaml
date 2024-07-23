@@ -32,10 +32,10 @@ jobs:
           echo "spec_version=$(grep "version =" build.gradle | cut -d "'" -f 2)" >> $GITHUB_ENV
       - name: Print version number
         run: echo ${{ env.spec_version }}
-      - name: Deploy SDK back into main branch and make tag
+      - name: Deploy SDK back into dev branch and make tag
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: main
+          branch: dev
           folder: .
           commit-message: "Upgrade Java SDK to spec ${{ env.spec_version }}"
           tag: ${{ env.spec_version }}
